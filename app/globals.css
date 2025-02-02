@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 41 74% 54%;    /* #f1b222 */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 300 2% 25%;  /* #414042 */
+  --secondary-foreground: 0 0% 98%;
+  --background: 0 0% 100%;
+  --foreground: 300 2% 25%;
+  --muted: 300 2% 95%;
+  --muted-foreground: 300 2% 40%;
+  --accent: 41 74% 95%;
+  --accent-foreground: 300 2% 25%;
+  --border: 300 2% 90%;
+  --input: 300 2% 90%;
+  --ring: 41 74% 54%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 300 2% 15%;
+  --foreground: 0 0% 98%;
+  --muted: 300 2% 20%;
+  --muted-foreground: 300 2% 76.1%;
+  --accent: 300 2% 20%;
+  --accent-foreground: 0 0% 98%;
+  --border: 300 2% 25%;
+  --input: 300 2% 25%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.nav-link {
+  @apply text-foreground/70 hover:text-foreground transition-colors;
+}
+
+.nav-link.active {
+  @apply text-foreground font-medium;
+}
+
+.section-padding {
+  @apply py-20 px-4 sm:px-6 lg:px-8;
+}
+
+.container-width {
+  @apply max-w-7xl mx-auto;
+}
