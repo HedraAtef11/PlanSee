@@ -1,10 +1,11 @@
-"use client"
+"use client";
 
-import React from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import React from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Autoplay from "embla-carousel-autoplay"; // Import the Autoplay plugin
 
 const partnerLogos = [
   "https://i.ibb.co/YTfd7TjW/image.jpg",
@@ -36,45 +37,48 @@ const partnerLogos = [
   "https://i.ibb.co/svCTfQG1/image.jpg",
   "https://i.ibb.co/4RvzRrdg/image.jpg",
   "https://i.ibb.co/vvYfLh2X/image.jpg",
-  "https://i.ibb.co/mFrBm90D/image.jpg"
-]
+  "https://i.ibb.co/mFrBm90D/image.jpg",
+];
 
 export function SuccessPartners() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: 'start',
-    loop: true,
-    skipSnaps: false,
-    dragFree: true,
-    containScroll: 'trimSnaps',
-    autoplay: {
-      delay: 4000,
-      stopOnInteraction: true,
+  // Initialize Embla Carousel with the Autoplay plugin
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "start",
+      loop: true,
+      skipSnaps: false,
+      dragFree: true,
+      containScroll: "trimSnaps",
     },
-  })
+    [Autoplay({ delay: 4000, stopOnInteraction: true })] // Pass the Autoplay plugin here
+  );
 
+  // Navigation functions
   const scrollPrev = React.useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev()
-  }, [emblaApi])
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
 
   const scrollNext = React.useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext()
-  }, [emblaApi])
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
-  const [selectedIndex, setSelectedIndex] = React.useState(0)
+  // Track the selected index
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   React.useEffect(() => {
-    if (!emblaApi) return
+    if (!emblaApi) return;
 
-    emblaApi.on('select', () => {
-      setSelectedIndex(emblaApi.selectedScrollSnap())
-    })
-  }, [emblaApi])
+    // Update the selected index when the carousel moves
+    emblaApi.on("select", () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    });
+  }, [emblaApi]);
 
   return (
     <section className="section-padding">
       <div className="container-width">
         <h2 className="text-3xl font-bold text-center mb-12">Success Partners</h2>
-        
+
         <div className="relative">
           {/* Navigation Buttons */}
           <Button
@@ -85,7 +89,7 @@ export function SuccessPartners() {
           >
             <ChevronLeft className="h-6 w-6" />
           </Button>
-          
+
           <Button
             variant="ghost"
             size="icon"
@@ -121,19 +125,23 @@ export function SuccessPartners() {
 
           {/* Dots */}
           <div className="flex justify-center gap-2 mt-6">
-            {Array.from({ length: Math.ceil(partnerLogos.length / 5) }).map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "w-2 h-2 rounded-full transition-colors",
-                  selectedIndex === index ? "bg-primary" : "bg-gray-300 dark:bg-gray-600"
-                )}
-                onClick={() => emblaApi?.scrollTo(index * 5)}
-              />
-            ))}
+            {Array.from({ length: Math.ceil(partnerLogos.length / 5) }).map(
+              (_, index) => (
+                <button
+                  key={index}
+                  className={cn(
+                    "w-2 h-2 rounded-full transition-colors",
+                    selectedIndex === index
+                      ? "bg-primary"
+                      : "bg-gray-300 dark:bg-gray-600"
+                  )}
+                  onClick={() => emblaApi?.scrollTo(index * 5)}
+                />
+              )
+            )}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
