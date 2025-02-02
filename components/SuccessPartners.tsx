@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Autoplay from "embla-carousel-autoplay";
+import { CreatePluginType } from "embla-carousel";
 
 const partnerLogos = [
   "https://i.ibb.co/YTfd7TjW/image.jpg",
@@ -49,7 +50,7 @@ export function SuccessPartners() {
       dragFree: true,
       containScroll: "trimSnaps",
     },
-    [Autoplay({ delay: 4000, stopOnInteraction: true })] // Pass the Autoplay plugin here
+     [Autoplay({ delay: 4000, stopOnInteraction: true }) as unknown as CreatePluginType<any, {}>]
   );
 
   const scrollPrev = React.useCallback(() => {
