@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Autoplay from "embla-carousel-autoplay"; // Import the Autoplay plugin
+import Autoplay from "embla-carousel-autoplay";
 
 const partnerLogos = [
   "https://i.ibb.co/YTfd7TjW/image.jpg",
@@ -41,7 +41,6 @@ const partnerLogos = [
 ];
 
 export function SuccessPartners() {
-  // Initialize Embla Carousel with the Autoplay plugin
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       align: "start",
@@ -53,7 +52,6 @@ export function SuccessPartners() {
     [Autoplay({ delay: 4000, stopOnInteraction: true })] // Pass the Autoplay plugin here
   );
 
-  // Navigation functions
   const scrollPrev = React.useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
@@ -62,13 +60,11 @@ export function SuccessPartners() {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  // Track the selected index
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   React.useEffect(() => {
     if (!emblaApi) return;
 
-    // Update the selected index when the carousel moves
     emblaApi.on("select", () => {
       setSelectedIndex(emblaApi.selectedScrollSnap());
     });
